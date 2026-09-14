@@ -8,12 +8,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     button.addEventListener('click', openNativeMap);
   });
 
-  if (location.hostname.endsWith("github.io")) {
-    setupPreviewForm();
-  } else {
-    await setupTurnstile();
-    setupContactForm();
-  }
+  await setupTurnstile();
+  setupContactForm();
 });
 
 function openNativeMap() {
@@ -34,6 +30,7 @@ let turnstileToken = '';
 let turnstileWidgetId = null;
 
 async function setupTurnstile() {
+  if (window.location.hostname.endsWith('github.io')) return;
   try {
     const response = await fetch('/api/config', { headers: { Accept: 'application/json' } });
     if (!response.ok) return;
@@ -79,6 +76,11 @@ function setupContactForm() {
 
     if (!form.reportValidity()) return;
 
+    if (window.location.hostname.endsWith('github.io')) {
+      status.textContent = 'Vista previa: el envío se activará en el dominio final. Puedes probar ahora el teléfono y WhatsApp.';
+      return;
+    }
+
     const submit = form.querySelector('button[type="submit"]');
     submit.disabled = true;
     submit.textContent = 'Enviando…';
@@ -108,12 +110,21 @@ function setupContactForm() {
   });
 }
 
-function setupPreviewForm() {
-  const form = document.querySelector('#contact-form');
-  const status = document.querySelector('#form-status');
-  if (!form || !status) return;
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    status.textContent = 'Vista previa: el envío de presupuestos se activará en el dominio definitivo.';
+function setupRevealAnimations() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const items = document.querySelectorAll('.section-head, .card, .process-step, .review-card, .reviews-summary, .contact-panel');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.12 });
+  items.forEach((item, index) => {
+    item.classList.add('reveal');
+    item.style.transitionDelay = `${Math.min(index % 3, 2) * 70}ms`;
+    observer.observe(item);
   });
 }
+
+document.addEventListener('DOMContentLoaded', setupRevealAnimations);
