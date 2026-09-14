@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   await setupTurnstile();
   setupContactForm();
+  setupMobileFormToggle();
 });
 
 function openNativeMap() {
@@ -128,3 +129,19 @@ function setupRevealAnimations() {
 }
 
 document.addEventListener('DOMContentLoaded', setupRevealAnimations);
+
+function setupMobileFormToggle() {
+  const panel = document.querySelector('.form-panel');
+  const button = document.querySelector('.mobile-form-toggle');
+  if (!panel || !button) return;
+  const setOpen = (open) => {
+    panel.classList.toggle('form-open', open);
+    button.setAttribute('aria-expanded', String(open));
+    button.textContent = open ? 'Cerrar formulario' : 'Abrir formulario';
+  };
+  button.addEventListener('click', () => setOpen(!panel.classList.contains('form-open')));
+  document.querySelectorAll('a[href="#presupuesto"]').forEach((link) => {
+    link.addEventListener('click', () => { if (window.matchMedia('(max-width: 620px)').matches) setOpen(true); });
+  });
+  if (location.hash === '#presupuesto' && window.matchMedia('(max-width: 620px)').matches) setOpen(true);
+}

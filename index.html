@@ -25,7 +25,7 @@
   <div class="topbar"><div class="container"><span>Av. de Castilla-La Mancha, 17 · Cabanillas del Campo</span><span>L–J 07:30–14:00 / 16:00–19:00 · V 07:30–14:00</span></div></div>
   <header class="site-header">
     <div class="container nav">
-      <a class="brand" href="" aria-label="GTAuto Cabanillas"><i class="brand-mark" aria-hidden="true"></i>GT<span>AUTO</span></a>
+      <a class="brand" href="./" aria-label="GTAuto Cabanillas"><i class="brand-mark" aria-hidden="true"></i>GT<span>AUTO</span></a>
       <nav class="nav-links" aria-label="Principal">
         <a href="#servicios">Servicios</a><a href="#motores">Motores</a><a href="#opiniones">Opiniones</a><a href="#contacto">Contacto</a>
         <a class="btn btn-primary" href="#presupuesto">Pedir presupuesto</a>
@@ -49,11 +49,9 @@
             <span class="stars" aria-label="5 estrellas">★★★★★</span><strong>5,0/5</strong><span>70+ reseñas públicas</span><span class="rating-arrow">↗</span>
           </a>
         </div>
-        <aside class="hero-panel" aria-label="Especialidades">
-          <div class="eyebrow">Especialidad</div>
-          <strong>Reconstrucción de motores</strong>
-          <p class="muted">Diagnóstico, desmontaje, reparación y reconstrucción cuando una avería importante exige algo más que cambiar piezas.</p>
-          <ul><li>Mecánica general y mantenimiento</li><li>Diagnosis y electricidad</li><li>Frenos, suspensión y neumáticos</li><li>Aire acondicionado y pre-ITV</li></ul>
+        <aside class="hero-panel hero-photo-panel" aria-label="Trabajo real en GTAuto">
+          <img src="assets/coche-taller.webp" alt="Vehículo en el elevador dentro del taller GTAuto Cabanillas" width="360" height="640" fetchpriority="high">
+          <div class="hero-photo-copy"><div class="eyebrow">Trabajo real · GTAuto</div><strong>Averías complejas y motores</strong><p>Diagnóstico antes de cambiar piezas. Reparación con criterio técnico y explicación clara al cliente.</p></div>
         </aside>
       </div>
     </section>
@@ -67,7 +65,7 @@
 
     <section id="servicios" class="section">
       <div class="container">
-        <div class="section-head"><div class="eyebrow">Servicios</div><h2>Lo que necesita el coche, sin complicarlo.</h2><p>Desde mantenimiento habitual hasta diagnosis y reparaciones de mayor complejidad.</p></div>
+        <div class="section-head"><div class="eyebrow">Servicios</div><h2>Lo que necesita el coche, sin complicarlo.</h2><p>Desde mantenimiento habitual hasta diagnosis y reparaciones de mayor complejidad.</p><span class="mobile-swipe-hint">Desliza para ver más →</span></div>
         <div class="services">
           <article class="card"><div class="num">01</div><h3>Mecánica general</h3><p>Mantenimiento preventivo y correctivo, revisiones, distribución, embrague, refrigeración y reparación de averías.</p></article>
           <article class="card"><div class="num">02</div><h3>Diagnosis y electricidad</h3><p>Diagnóstico electrónico, localización de fallos y reparación de sistemas eléctricos y electrónicos.</p></article>
@@ -81,7 +79,7 @@
 
     <section class="section process-section" aria-labelledby="proceso-title">
       <div class="container">
-        <div class="section-head"><div class="eyebrow">Cómo trabajamos</div><h2 id="proceso-title">Menos dudas antes de reparar.</h2><p>Un proceso sencillo para entender el problema, valorar la intervención y decidir con criterio.</p></div>
+        <div class="section-head"><div class="eyebrow">Cómo trabajamos</div><h2 id="proceso-title">Menos dudas antes de reparar.</h2><p>Un proceso sencillo para entender el problema, valorar la intervención y decidir con criterio.</p><span class="mobile-swipe-hint">3 pasos · desliza →</span></div>
         <div class="process-grid">
           <article class="process-step"><span>01</span><h3>Cuéntanos el caso</h3><p>Envíanos el modelo, matrícula, síntomas y cualquier información que ayude a entender la avería.</p></article>
           <article class="process-step"><span>02</span><h3>Diagnosticamos</h3><p>Revisamos el vehículo y buscamos la causa antes de plantear una reparación, especialmente en averías complejas.</p></article>
@@ -99,25 +97,23 @@
           <div class="checks"><div class="check">Diagnóstico antes de intervenir</div><div class="check">Desmontaje y evaluación de componentes</div><div class="check">Reconstrucción según el estado real del motor</div><div class="check">Atención a clientes de península e islas</div></div>
           <a class="btn btn-primary" href="#presupuesto">Consultar un caso</a>
         </div>
-        <div class="engine-box"><p>¿El coche tiene consumo de aceite, pérdida de compresión, sobrecalentamiento, ruido interno o una avería de motor importante? Envía el modelo, matrícula y una descripción del problema para valorar el siguiente paso.</p></div>
+        <div class="engine-box real-engine-photo"><p>¿El coche tiene consumo de aceite, pérdida de compresión, sobrecalentamiento, ruido interno o una avería de motor importante? Envía el modelo, matrícula y una descripción del problema para valorar el siguiente paso.</p></div>
       </div>
     </section>
 
     <section id="opiniones" class="section reviews-section" aria-labelledby="opiniones-title">
-      <div class="container reviews-grid">
-        <div class="reviews-summary">
-          <div class="eyebrow">Opiniones reales</div>
-          <h2 id="opiniones-title">La confianza se demuestra fuera de esta web.</h2>
-          <div class="rating-big"><span>5,0</span><div><div class="stars" aria-hidden="true">★★★★★</div><strong>70+ reseñas públicas</strong></div></div>
-          <p class="muted">La valoración pública de GTAuto es una de las señales más claras de la experiencia que encuentran los clientes.</p>
-          <a class="btn btn-secondary" href="https://www.google.com/maps/search/?api=1&query=GTAuto%20Cabanillas&query_place_id=ChIJW1SVogOtQw0RNl-ruew79ng" target="_blank" rel="noopener">Ver reseñas en Google ↗</a>
+      <div class="container">
+        <div class="reviews-head">
+          <div><div class="eyebrow">Reseñas de Google</div><h2 id="opiniones-title">5,0/5. La confianza ya está demostrada.</h2></div>
+          <div class="reviews-score"><strong>5,0</strong><div><div class="stars" aria-hidden="true">★★★★★</div><span>más de 70 reseñas</span></div></div>
+          <a class="btn btn-secondary" href="https://www.google.com/maps/search/?api=1&query=GTAuto%20Cabanillas&query_place_id=ChIJW1SVogOtQw0RNl-ruew79ng" target="_blank" rel="noopener">Ver todas en Google ↗</a>
         </div>
-        <article class="review-card">
-          <div class="review-mark">“</div>
-          <blockquote>He visto pocos mecánicos como este señor y además, honesto. A mí me ha resuelto muy bien y con precio razonable.</blockquote>
-          <div class="review-meta"><span class="stars" aria-hidden="true">★★★★★</span><span>Cliente de GTAuto · reseña pública</span></div>
-          <p>El cliente explica además que el coche había sido dado prácticamente por perdido en otro taller y pudo volver a circular tras la intervención.</p>
-        </article>
+        <div class="reviews-track" aria-label="Reseñas reales de clientes">
+          <article class="review-card compact-review"><div class="review-top"><span class="stars" aria-hidden="true">★★★★★</span><span>Google · reciente</span></div><p>Pedro explicó cada pieza y precio antes de cambiar nada, pidió confirmación y dejó el coche como nuevo.</p><strong>Adrián Rodríguez</strong><small>Resumen de reseña pública</small></article>
+          <article class="review-card compact-review"><div class="review-top"><span class="stars" aria-hidden="true">★★★★★</span><span>Google · reciente</span></div><p>Profesional, claro y honesto. Cliente desde hace años y siempre satisfecho con el trabajo.</p><strong>Guillermo Martínez</strong><small>Resumen de reseña pública</small></article>
+          <article class="review-card compact-review"><div class="review-top"><span class="stars" aria-hidden="true">★★★★★</span><span>Google · reciente</span></div><p>Trabajo rápido e impecable, precio justo y plazos cumplidos. Lo considera ya su taller de confianza.</p><strong>Cliente de GTAuto</strong><small>Resumen de reseña pública</small></article>
+          <article class="review-card compact-review"><div class="review-top"><span class="stars" aria-hidden="true">★★★★★</span><span>Google</span></div><p>Otro taller daba el coche por perdido. Tras la intervención de Pedro volvió a circular y el cliente destacó su experiencia y honestidad.</p><strong>Cliente de GTAuto</strong><small>Resumen de reseña pública</small></article>
+        </div>
       </div>
     </section>
 
@@ -144,10 +140,12 @@
             <div><strong>Horario</strong><span>L–J: 07:30–14:00 / 16:00–19:00<br>V: 07:30–14:00</span></div>
           </div>
           <div class="hero-actions"><a class="btn btn-secondary" href="tel:+34649369059">Llamar</a><a class="btn btn-secondary" href="https://wa.me/34649369059" rel="noopener">WhatsApp</a><button class="btn btn-secondary" type="button" data-map>Cómo llegar</button></div>
+          <img class="contact-photo" src="assets/fachada-taller.webp" alt="Exterior de GTAuto Cabanillas" width="360" height="640" loading="lazy">
         </div>
 
-        <div id="presupuesto" class="contact-panel">
+        <div id="presupuesto" class="contact-panel form-panel">
           <div class="eyebrow">Presupuesto / consulta</div><h2>Cuéntanos qué necesita tu coche.</h2>
+          <button class="btn btn-primary mobile-form-toggle" type="button" aria-expanded="false" aria-controls="contact-form">Abrir formulario</button>
           <form id="contact-form" novalidate>
             <div class="field"><label for="name">Nombre *</label><input id="name" name="name" autocomplete="name" required maxlength="80"></div>
             <div class="field"><label for="phone">Teléfono *</label><input id="phone" name="phone" autocomplete="tel" required maxlength="30"></div>
