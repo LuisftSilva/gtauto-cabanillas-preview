@@ -1,16 +1,20 @@
-const $ = (s) => document.querySelector(s);
+const $ = (selector, scope = document) => scope.querySelector(selector);
+const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
+
+let turnstileToken = '';
+let turnstileWidgetId = null;
 
 document.addEventListener('DOMContentLoaded', async () => {
   const year = $('#year');
   if (year) year.textContent = new Date().getFullYear();
 
-  document.querySelectorAll('[data-map]').forEach((button) => {
-    button.addEventListener('click', openNativeMap);
-  });
-
-  await setupTurnstile();
+  $$('[data-map]').forEach((button) => button.addEventListener('click', openNativeMap));
+  setupMobileMenu();
+  setupQuoteDialog();
+  setupReviewCarousel();
+  setupServicesStatus();
+  setupRevealAnimations();
   setupContactForm();
-  setupMobileFormToggle();
 });
 
 function openNativeMap() {
@@ -27,11 +31,84 @@ function openNativeMap() {
   window.open(`https://www.google.com/maps/search/?api=1&query=${address}`, '_blank', 'noopener,noreferrer');
 }
 
-let turnstileToken = '';
-let turnstileWidgetId = null;
+function setupMobileMenu() {
+  const button = $('.menu-toggle');
+  const menu = $('#mobile-menu');
+  if (!button || !menu) return;
+
+  const setOpen = (open) => {
+    button.setAttribute('aria-expanded', String(open));
+    button.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    menu.hidden = !open;
+  };
+
+  button.addEventListener('click', () => setOpen(button.getAttribute('aria-expanded') !== 'true'));
+  $$('a', menu).forEach((link) => link.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') setOpen(false);
+  });
+}
+
+function setupQuoteDialog() {
+  const dialog = $('#quote-dialog');
+  if (!dialog) return;
+
+  const open = () => {
+    if (!dialog.open) dialog.showModal();
+    document.documentElement.classList.add('dialog-open');
+    setupTurnstile();
+    requestAnimationFrame(() => $('#name', dialog)?.focus({ preventScroll: true }));
+  };
+  const close = () => {
+    if (dialog.open) dialog.close();
+    document.documentElement.classList.remove('dialog-open');
+  };
+
+  $$('[data-open-quote]').forEach((button) => button.addEventListener('click', open));
+  $$('[data-close-quote]', dialog).forEach((button) => button.addEventListener('click', close));
+  dialog.addEventListener('close', () => document.documentElement.classList.remove('dialog-open'));
+  dialog.addEventListener('click', (event) => {
+    const rect = dialog.getBoundingClientRect();
+    const inside = event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom;
+    if (!inside) close();
+  });
+  const params = new URLSearchParams(location.search);
+  if (params.get('presupuesto') === '1') {
+    open();
+    history.replaceState({}, '', location.pathname + location.hash);
+  }
+}
+
+function setupReviewCarousel() {
+  const track = $('[data-review-track]');
+  if (!track) return;
+  const amount = () => Math.min(track.clientWidth * .72, 390);
+  $('[data-review-prev]')?.addEventListener('click', () => track.scrollBy({ left: -amount(), behavior: 'smooth' }));
+  $('[data-review-next]')?.addEventListener('click', () => track.scrollBy({ left: amount(), behavior: 'smooth' }));
+}
+
+function setupServicesStatus() {
+  const track = $('[data-services-track]');
+  const status = $('[data-services-status]');
+  if (!track || !status) return;
+  const cards = $$('.card', track);
+  const update = () => {
+    if (!cards.length) return;
+    const left = track.getBoundingClientRect().left;
+    let best = 0;
+    let distance = Infinity;
+    cards.forEach((card, index) => {
+      const d = Math.abs(card.getBoundingClientRect().left - left);
+      if (d < distance) { distance = d; best = index; }
+    });
+    status.textContent = `${String(best + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
+  };
+  track.addEventListener('scroll', update, { passive: true });
+  update();
+}
 
 async function setupTurnstile() {
-  if (window.location.hostname.endsWith('github.io')) return;
+  if (turnstileWidgetId !== null || window.location.hostname.endsWith('github.io')) return;
   try {
     const response = await fetch('/api/config', { headers: { Accept: 'application/json' } });
     if (!response.ok) return;
@@ -44,12 +121,13 @@ async function setupTurnstile() {
     turnstileWidgetId = window.turnstile.render(slot, {
       sitekey: config.turnstileSiteKey,
       theme: 'dark',
+      action: 'contact',
       callback: (token) => { turnstileToken = token; },
       'expired-callback': () => { turnstileToken = ''; },
       'error-callback': () => { turnstileToken = ''; }
     });
   } catch (_) {
-    // El formulario seguirá mostrando un error claro si la verificación es obligatoria en servidor.
+    // El servidor mostrará un error claro si la verificación es necesaria.
   }
 }
 
@@ -74,18 +152,16 @@ function setupContactForm() {
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     status.textContent = '';
-
     if (!form.reportValidity()) return;
 
     if (window.location.hostname.endsWith('github.io')) {
-      status.textContent = 'Vista previa: el envío se activará en el dominio final. Puedes probar ahora el teléfono y WhatsApp.';
+      status.textContent = 'Vista previa: el envío se activará en el dominio final. Puedes probar teléfono, WhatsApp y navegación.';
       return;
     }
 
-    const submit = form.querySelector('button[type="submit"]');
+    const submit = $('button[type="submit"]', form);
     submit.disabled = true;
     submit.textContent = 'Enviando…';
-
     const data = Object.fromEntries(new FormData(form).entries());
     data.turnstileToken = turnstileToken;
 
@@ -97,7 +173,6 @@ function setupContactForm() {
       });
       const result = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(result.error || 'No se ha podido enviar la solicitud.');
-
       status.textContent = 'Solicitud enviada. GTAuto la recibirá directamente en su correo.';
       form.reset();
       turnstileToken = '';
@@ -113,35 +188,17 @@ function setupContactForm() {
 
 function setupRevealAnimations() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const items = document.querySelectorAll('.section-head, .card, .process-step, .review-card, .reviews-summary, .contact-panel');
+  const items = $$('.section-head, .card, .process-strip, .engine-copy, .engine-gallery, .review-card, .reviews-head, .contact-copy, .contact-details, .contact-visual');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
       entry.target.classList.add('is-visible');
       observer.unobserve(entry.target);
     });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.1 });
   items.forEach((item, index) => {
     item.classList.add('reveal');
-    item.style.transitionDelay = `${Math.min(index % 3, 2) * 70}ms`;
+    item.style.transitionDelay = `${Math.min(index % 3, 2) * 55}ms`;
     observer.observe(item);
   });
-}
-
-document.addEventListener('DOMContentLoaded', setupRevealAnimations);
-
-function setupMobileFormToggle() {
-  const panel = document.querySelector('.form-panel');
-  const button = document.querySelector('.mobile-form-toggle');
-  if (!panel || !button) return;
-  const setOpen = (open) => {
-    panel.classList.toggle('form-open', open);
-    button.setAttribute('aria-expanded', String(open));
-    button.textContent = open ? 'Cerrar formulario' : 'Abrir formulario';
-  };
-  button.addEventListener('click', () => setOpen(!panel.classList.contains('form-open')));
-  document.querySelectorAll('a[href="#presupuesto"]').forEach((link) => {
-    link.addEventListener('click', () => { if (window.matchMedia('(max-width: 620px)').matches) setOpen(true); });
-  });
-  if (location.hash === '#presupuesto' && window.matchMedia('(max-width: 620px)').matches) setOpen(true);
 }
