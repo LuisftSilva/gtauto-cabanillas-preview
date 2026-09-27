@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   $$('[data-map]').forEach((button) => button.addEventListener('click', openNativeMap));
   setupMobileMenu();
+  setupStickyQuote();
   setupQuoteDialog();
   setupReviewCarousel();
   setupServicesStatus();
@@ -47,6 +48,24 @@ function setupMobileMenu() {
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') setOpen(false);
   });
+}
+
+function setupStickyQuote() {
+  const header = $('.site-header');
+  const hero = $('.hero, .detail-hero');
+  const button = $('.nav-quote');
+  if (!header || !hero || !button) return;
+
+  const setVisible = (visible) => {
+    if (window.matchMedia('(max-width: 900px)').matches) visible = false;
+    header.classList.toggle('show-quote', visible);
+    button.tabIndex = visible ? 0 : -1;
+    button.setAttribute('aria-hidden', visible ? 'false' : 'true');
+  };
+
+  const observer = new IntersectionObserver(([entry]) => setVisible(!entry.isIntersecting), { threshold: 0.12 });
+  observer.observe(hero);
+  window.addEventListener('resize', () => setVisible(window.scrollY > hero.offsetHeight * .55), { passive: true });
 }
 
 function setupQuoteDialog() {

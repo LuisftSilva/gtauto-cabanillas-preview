@@ -40,7 +40,7 @@
       <nav class="nav-links" aria-label="Principal">
         <a href="#servicios">Servicios</a><a href="#motores">Motores</a><a href="#opiniones">Opiniones</a><a href="#contacto">Contacto</a>
         <a class="nav-phone" href="tel:+34649369059">649 36 90 59</a>
-        <button class="btn btn-primary" type="button" data-open-quote>Pedir presupuesto</button>
+        <button class="btn btn-primary nav-quote" type="button" data-open-quote aria-label="Pedir presupuesto" tabindex="-1">Presupuesto</button>
       </nav>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú"><span></span><span></span></button>
     </div>
@@ -107,7 +107,7 @@
           <h2>Reconstrucción de motores para toda España.</h2>
           <p class="muted">Cuando una avería es grave, cambiar el motor completo no siempre es la mejor respuesta. Evaluamos el daño real y planteamos la intervención con criterio técnico.</p>
           <div class="checks"><div class="check">Diagnóstico antes de intervenir</div><div class="check">Desmontaje y evaluación de componentes</div><div class="check">Reconstrucción según el estado real</div><div class="check">Consultas desde península e islas</div></div>
-          <div class="engine-actions"><button class="btn btn-primary" type="button" data-open-quote>Consultar un caso</button><a class="btn btn-secondary" href="/gtauto-cabanillas-preview/reconstruccion-motores.html">Ver proceso completo</a></div>
+          <a class="text-link" href="/gtauto-cabanillas-preview/reconstruccion-motores.html">Ver cómo reconstruimos un motor <span aria-hidden="true">→</span></a>
         </div>
         <div class="engine-gallery" aria-label="Trabajos reales de reconstrucción de motores en GTAuto">
           <figure class="engine-main"><img src="/gtauto-cabanillas-preview/assets/bancada-piezas-motor-gtauto-cabanillas.webp" alt="Banco de trabajo con piezas de motor desmontadas y organizadas en GTAuto Cabanillas" width="1100" height="1467" loading="lazy"><figcaption>Desmontaje y evaluación · trabajo real</figcaption></figure>
@@ -121,7 +121,7 @@
         <div class="reviews-head">
           <div><div class="eyebrow">Reseñas de Google</div><h2 id="opiniones-title">Lo dicen quienes ya trajeron su coche.</h2></div>
           <div class="reviews-score"><strong>5,0</strong><div><div class="stars" aria-hidden="true">★★★★★</div><span>50+ reseñas públicas</span></div></div>
-          <div class="review-actions"><button class="carousel-arrow" type="button" data-review-prev aria-label="Reseña anterior">←</button><button class="carousel-arrow" type="button" data-review-next aria-label="Reseña siguiente">→</button><a class="btn btn-secondary" href="https://www.google.com/maps/search/?api=1&query=GTAuto%20Cabanillas&query_place_id=ChIJW1SVogOtQw0RNl-ruew79ng" target="_blank" rel="noopener">Ver en Google ↗</a></div>
+          <div class="review-actions"><button class="carousel-arrow" type="button" data-review-prev aria-label="Reseña anterior">←</button><button class="carousel-arrow" type="button" data-review-next aria-label="Reseña siguiente">→</button><a class="text-link" href="https://www.google.com/maps/search/?api=1&query=GTAuto%20Cabanillas&query_place_id=ChIJW1SVogOtQw0RNl-ruew79ng" target="_blank" rel="noopener">Ver todas en Google <span aria-hidden="true">↗</span></a></div>
         </div>
         <div class="reviews-track" data-review-track aria-label="Reseñas reales de clientes">
           <article class="review-card compact-review"><div class="review-top"><span class="stars" aria-hidden="true">★★★★★</span><span>Google</span></div><p>Otro taller daba el coche por perdido. Pedro consiguió recuperarlo y el cliente destacó su experiencia, honestidad y precio razonable.</p><strong>Cliente de GTAuto</strong><small>Resumen de reseña pública</small></article>
@@ -136,15 +136,15 @@
     <section id="contacto" class="section contact-section">
       <div class="container contact-compact">
         <div class="contact-copy">
-          <div class="eyebrow">GTAuto Cabanillas</div><h2>Tu taller en Cabanillas del Campo.</h2>
-          <p>Para una consulta o presupuesto, escribe por WhatsApp, llama o envíanos los datos del coche desde el formulario.</p>
-          <div class="contact-actions"><button class="btn btn-primary" type="button" data-open-quote>Pedir presupuesto</button><a class="btn btn-secondary" href="https://wa.me/34649369059" rel="noopener">WhatsApp</a><button class="btn btn-secondary" type="button" data-map>Cómo llegar</button></div>
+          <div class="eyebrow">Contacto y ubicación</div><h2>GTAuto Cabanillas.</h2>
+          <p>Todo lo necesario para llegar al taller o hablar directamente con nosotros, sin pasos innecesarios.</p>
+          <button class="map-primary" type="button" data-map><span>Cómo llegar</span><small>Abrir en la app de mapas <b aria-hidden="true">↗</b></small></button>
         </div>
         <div class="contact-details">
-          <div><span>Teléfono</span><a href="tel:+34649369059">+34 649 36 90 59</a></div>
-          <div><span>Dirección</span><button type="button" data-map>Av. de Castilla-La Mancha, 17, nave 5<br>19171 Cabanillas del Campo, Guadalajara</button></div>
-          <div><span>Horario</span><p>L–J 07:30–14:00 / 16:00–19:00<br>V 07:30–14:00</p></div>
-          <div><span>Instagram</span><a href="https://www.instagram.com/gtauto.taller/" target="_blank" rel="noopener">@gtauto.taller ↗</a></div>
+          <a class="contact-row" href="tel:+34649369059"><span>Teléfono</span><strong>+34 649 36 90 59</strong><b aria-hidden="true">→</b></a>
+          <a class="contact-row" href="https://wa.me/34649369059" rel="noopener"><span>WhatsApp</span><strong>Escribir a GTAuto</strong><b aria-hidden="true">→</b></a>
+          <div class="contact-row static"><span>Horario</span><strong>L–J 07:30–14:00 / 16:00–19:00<br>V 07:30–14:00</strong></div>
+          <a class="contact-row" href="https://www.instagram.com/gtauto.taller/" target="_blank" rel="noopener"><span>Instagram</span><strong>@gtauto.taller</strong><b aria-hidden="true">↗</b></a>
         </div>
         <figure class="contact-visual"><img src="/gtauto-cabanillas-preview/assets/fachada-taller.webp" alt="Exterior de GTAuto Cabanillas" width="360" height="640" loading="lazy"><figcaption>Av. de Castilla-La Mancha, 17 · Cabanillas del Campo</figcaption></figure>
       </div>
