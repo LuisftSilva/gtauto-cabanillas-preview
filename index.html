@@ -58,7 +58,7 @@
           <p>Mecánica general, diagnosis, híbridos y reconstrucción de motores. Te explicamos qué encontramos antes de decidir la reparación.</p>
           <div class="hero-actions">
             <button class="btn btn-primary" type="button" data-open-quote>Pedir presupuesto</button>
-            <a class="btn btn-secondary" href="https://wa.me/34649369059" rel="noopener">WhatsApp</a>
+            <a class="btn btn-secondary" href="https://wa.me/34649369059" data-whatsapp="general" rel="noopener">WhatsApp</a>
           </div>
           <a class="hero-rating" href="https://www.google.com/maps/search/?api=1&query=GTAuto%20Cabanillas&query_place_id=ChIJW1SVogOtQw0RNl-ruew79ng" target="_blank" rel="noopener">
             <span class="stars" aria-label="5 estrellas">★★★★★</span><strong>5,0</strong><span>50+ reseñas en Google</span><span class="rating-arrow">↗</span>
@@ -73,7 +73,7 @@
 
     <div class="trustbar"><div class="container trust-grid">
       <div class="trust-item"><strong>30+ años</strong><span>de experiencia mecánica</span></div>
-      <div class="trust-item"><strong>5,0 ★</strong><span>valoración pública actual</span></div>
+      <div class="trust-item"><strong>Motores</strong><span>diagnosis y reconstrucción</span></div>
       <div class="trust-item"><strong>Híbridos</strong><span>mantenimiento y reparación</span></div>
       <div class="trust-item"><strong>Toda España</strong><span>motores y trabajos especiales</span></div>
     </div></div>
@@ -137,12 +137,12 @@
       <div class="container contact-compact">
         <div class="contact-copy">
           <div class="eyebrow">Contacto y ubicación</div><h2>GTAuto Cabanillas.</h2>
-          <p>Todo lo necesario para llegar al taller o hablar directamente con nosotros, sin pasos innecesarios.</p>
+          <p>Av. de Castilla-La Mancha, 17, nave 5. Consulta el horario o abre la ruta directamente en tu app de mapas.</p>
           <button class="map-primary" type="button" data-map><span>Cómo llegar</span><small>Abrir en la app de mapas <b aria-hidden="true">↗</b></small></button>
         </div>
         <div class="contact-details">
-          <a class="contact-row" href="tel:+34649369059"><span>Teléfono</span><strong>+34 649 36 90 59</strong><b aria-hidden="true">→</b></a>
-          <a class="contact-row" href="https://wa.me/34649369059" rel="noopener"><span>WhatsApp</span><strong>Escribir a GTAuto</strong><b aria-hidden="true">→</b></a>
+          <a class="contact-row mobile-redundant" href="tel:+34649369059"><span>Teléfono</span><strong>+34 649 36 90 59</strong><b aria-hidden="true">→</b></a>
+          <a class="contact-row mobile-redundant" href="https://wa.me/34649369059" data-whatsapp="general" rel="noopener"><span>WhatsApp</span><strong>Escribir a GTAuto</strong><b aria-hidden="true">→</b></a>
           <div class="contact-row static"><span>Horario</span><strong>L–J 07:30–14:00 / 16:00–19:00<br>V 07:30–14:00</strong></div>
           <a class="contact-row" href="https://www.instagram.com/gtauto.taller/" target="_blank" rel="noopener"><span>Instagram</span><strong>@gtauto.taller</strong><b aria-hidden="true">↗</b></a>
         </div>
@@ -157,10 +157,8 @@
       <form id="contact-form" novalidate>
         <div class="field"><label for="name">Nombre *</label><input id="name" name="name" autocomplete="name" required maxlength="80"></div>
         <div class="field"><label for="phone">Teléfono *</label><input id="phone" name="phone" autocomplete="tel" required maxlength="30"></div>
-        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" maxlength="120"></div>
         <div class="field"><label for="service">Servicio *</label><select id="service" name="service" required><option value="">Selecciona</option><option>Mecánica general / mantenimiento</option><option>Diagnosis / electricidad</option><option>Reconstrucción de motor</option><option>Frenos / suspensión</option><option>Neumáticos</option><option>Aire acondicionado</option><option>Pre-ITV</option><option>Vehículo híbrido</option><option>Otro</option></select></div>
-        <div class="field"><label for="vehicle">Marca y modelo</label><input id="vehicle" name="vehicle" maxlength="100" placeholder="Ej. BMW 320d"></div>
-        <div class="field"><label for="plate">Matrícula</label><input id="plate" name="plate" maxlength="20"></div>
+        <details class="optional-fields field full"><summary>Añadir datos del vehículo <span>opcional</span></summary><div class="optional-fields-grid"><div class="field"><label for="vehicle">Marca y modelo</label><input id="vehicle" name="vehicle" maxlength="100" placeholder="Ej. BMW 320d"></div><div class="field"><label for="plate">Matrícula</label><input id="plate" name="plate" maxlength="20"></div><div class="field full"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" maxlength="120" placeholder="Solo si prefieres respuesta por email"></div></div></details>
         <div class="field full"><label for="message">Describe el problema *</label><textarea id="message" name="message" required maxlength="3000" placeholder="Síntomas, avería, trabajos que necesitas o cualquier dato que pueda ayudar."></textarea></div>
         <div class="hp" aria-hidden="true"><label for="company">Empresa</label><input id="company" name="company" tabindex="-1" autocomplete="off"></div>
         <div id="turnstile-slot" class="field full"></div>
@@ -172,7 +170,7 @@
   </dialog>
 
   <footer class="footer"><div class="container footer-grid"><div>© <span id="year"></span> GTAuto Cabanillas</div><div class="footer-links"><a href="https://www.instagram.com/gtauto.taller/" target="_blank" rel="noopener">Instagram</a><a href="/gtauto-cabanillas-preview/aviso-legal.html">Aviso legal</a><a href="/gtauto-cabanillas-preview/privacidad.html">Privacidad</a><a href="/gtauto-cabanillas-preview/cookies.html">Cookies</a></div></div></footer>
-  <div class="mobile-actions"><a class="btn btn-secondary" href="tel:+34649369059">Llamar</a><a class="btn btn-secondary" href="https://wa.me/34649369059" rel="noopener">WhatsApp</a><button class="btn btn-primary" type="button" data-open-quote>Presupuesto</button></div>
+  <div class="mobile-actions"><a class="btn btn-secondary" href="tel:+34649369059">Llamar</a><a class="btn btn-secondary" href="https://wa.me/34649369059" data-whatsapp="general" rel="noopener">WhatsApp</a><button class="btn btn-primary" type="button" data-open-quote>Presupuesto</button></div>
   <script src="/gtauto-cabanillas-preview/app.js" defer></script>
 </body>
 </html>

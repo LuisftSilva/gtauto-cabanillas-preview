@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (year) year.textContent = new Date().getFullYear();
 
   $$('[data-map]').forEach((button) => button.addEventListener('click', openNativeMap));
+  setupWhatsAppLinks();
   setupMobileMenu();
   setupStickyQuote();
   setupQuoteDialog();
@@ -17,6 +18,18 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupRevealAnimations();
   setupContactForm();
 });
+
+function setupWhatsAppLinks() {
+  const messages = {
+    general: 'Hola, he visto la web de GTAuto Cabanillas y quiero hacer una consulta sobre mi coche.\n\nMarca y modelo: \nMatrícula: \nProblema o servicio: ',
+    motor: 'Hola, he visto la página de reconstrucción de motores de GTAuto Cabanillas y quiero consultar un caso.\n\nMarca y modelo: \nMatrícula: \nKilometraje aproximado: \nSíntomas o avería: '
+  };
+  $$('[data-whatsapp]').forEach((link) => {
+    const key = link.dataset.whatsapp || 'general';
+    const text = messages[key] || messages.general;
+    link.href = `https://wa.me/34649369059?text=${encodeURIComponent(text)}`;
+  });
+}
 
 function openNativeMap() {
   const address = encodeURIComponent('GTAuto Cabanillas, Av. de Castilla-La Mancha 17 nave 5, 19171 Cabanillas del Campo, Guadalajara, España');
